@@ -153,7 +153,7 @@
   .legend i.sq { width:11px; height:11px; border-radius:3px; }
 
   .grid-line { stroke:var(--hair); stroke-width:1; }
-  .axis-txt { font-family:var(--mono); font-size:11px; fill:var(--faint); }
+  .axis-txt { font-family:var(--mono); font-size:11px; fill:var(--muted); }
   .axis-txt.mid { font-size:10px; }
 
   /* ---------- DATA TABLES ---------- */
@@ -300,10 +300,10 @@
     <div class="wrap">
       <div class="measure body-copy reveal">
         <div class="sec-head"><span class="sec-num">01</span><div><div class="tag">The premise</div><h2>A decision model, not a sales model</h2></div></div>
-        <p class="lead-line">The model&rsquo;s job is not to make the programme look good. It is to answer one question honestly: can a paid Gnosis Pay card programme make commercial and operational sense for Gleec once every real cost is counted?</p>
-        <p>&ldquo;Every real cost&rdquo; means provider fees, Visa costs, fraud and FinCrime operations, support headcount, acquisition spend and collateral &mdash; all included before the answer is read. The model is fair precisely <em>because</em> it does not force a positive result.</p>
-        <p>In the earlier version, at the current <span class="inline-fig">$7</span> acquisition cost, the answer was uncomfortable: break-even only in month 18, cumulatively negative across the two years. This updated model reprices the customer top-up fee from a break-even <span class="inline-fig">0.25%</span> to <span class="inline-fig">1.75%</span> &mdash; turning top-up from a neutral pass-through into the largest single revenue line. With that one change, break-even moves to <strong>month 5</strong>, the early losses are recovered by <strong>month 9</strong>, and the two years finish <strong>+$2.2M</strong> cumulatively.</p>
-        <div class="pull">Gnosis Pay is treated as the card-programme infrastructure provider. Gleec keeps ownership of its user relationship, support intake, governance, evidence quality and residual business risk.</div>
+        <p class="lead-line">The model&rsquo;s job is not to make the programme look good. It answers one question honestly: can a paid Gnosis Pay card programme make commercial and operational sense for Gleec once every real cost is counted?</p>
+        <p>It does not force a positive result. Every real cost is counted before the answer is read: provider fees, Visa costs, fraud and FinCrime operations, support headcount, acquisition spend and collateral.</p>
+        <p>At <span class="inline-fig">$7</span> acquisition cost, the earlier version broke even in month 18 and stayed cumulatively negative over the two years. This version reprices the customer top-up fee from <span class="inline-fig">0.25%</span> to <span class="inline-fig">1.75%</span>, which makes top-up the largest single revenue line. Break-even then moves to <strong>month 5</strong>, cumulative losses are recovered by <strong>month 9</strong>, and the 24 months finish <strong>+$2.2M</strong>.</p>
+        <p>Gnosis Pay is the card-programme infrastructure provider. Gleec keeps its user relationship, support intake, governance, evidence quality and residual business risk.</p>
       </div>
     </div>
   </section>
@@ -417,7 +417,7 @@
     <div class="wrap">
       <div class="measure body-copy" style="margin-bottom:1.6rem;">
         <div class="sec-head"><span class="sec-num">06</span><div><div class="tag">Before &amp; after</div><h2>What changed &mdash; and what it did</h2></div></div>
-        <p class="lead-line">The previous model treated top-up as a neutral pass-through. This one prices it as a real product. Everything else &mdash; growth, spend, subscription, collateral, CAC &mdash; is held constant, so the comparison isolates the effect of that decision.</p>
+        <p>The previous version treated top-up as a neutral pass-through; this version charges 1.75% for it. Everything else &mdash; growth, spend, subscription, collateral, CAC &mdash; is held constant, so the table isolates the effect of that one change.</p>
       </div>
 
       <div class="levers reveal">
@@ -482,7 +482,7 @@
       </div>
 
       <div class="measure body-copy" style="margin-top:1.6rem;">
-        <p>The swing is almost entirely the top-up line. It hangs on one commercial judgement: <strong>will users accept a 1.75% fee to load their card?</strong> Top-up is high-friction &mdash; people will pay to spend but resent paying to fund. If churn stays low at 1.75%, the programme is strongly cash-generative. If the fee has to come down to protect activation, the result lands somewhere between these two columns. CAC discipline (holding the $7) remains the second lever.</p>
+        <p>The swing is almost entirely the top-up line, and it rests on one question: <strong>will users accept a 1.75% fee to load their card?</strong> Top-up is high-friction. If the fee holds, the programme is cash-generative; if it has to come down to protect activation, the result sits between the two columns. Holding CAC at $7 is the second lever.</p>
       </div>
     </div>
   </section>
@@ -491,8 +491,8 @@
   <section>
     <div class="wrap">
       <div class="measure body-copy" style="margin-bottom:1.6rem;">
-        <div class="sec-head"><span class="sec-num">07</span><div><div class="tag">Liquidity</div><h2>The number that actually constrains us</h2></div></div>
-        <p>Now that the programme turns cash-positive so early, the liquidity picture is almost <em>purely</em> collateral. The 5-day security deposit climbs to <span class="inline-fig">$2.5M</span> by month 24; the only operating drag is a shallow <span class="inline-fig">&minus;$102k</span> dip in the first four months, recovered by month 9. So the <strong>peak cash need is ~$2.5M &mdash; essentially all collateral</strong>. The accounting cost of that deposit is small; the lock-up of the cash is the real constraint.</p>
+        <div class="sec-head"><span class="sec-num">07</span><div><div class="tag">Liquidity</div><h2>Cash need is almost entirely collateral</h2></div></div>
+        <p>Because the programme turns cash-positive early, the liquidity need is almost entirely collateral. The 5-day deposit reaches <span class="inline-fig">$2.5M</span> by month 24; operating losses add only a <span class="inline-fig">&minus;$102k</span> dip in the first four months, recovered by month 9. <strong>Peak cash need is ~$2.5M, essentially all collateral.</strong> The financing cost of the deposit is small; the cash lock-up is the constraint.</p>
       </div>
       <div class="panel reveal">
         <div class="panel-head"><h3>Cumulative cash need &mdash; almost all collateral</h3><div class="desc">Over 24 months, the total cash need (ink) tracks the collateral ramp (brass); operating losses add only a thin early sliver.</div></div>
@@ -557,9 +557,8 @@
     <div class="wrap">
       <div class="measure body-copy">
         <div class="sec-head"><span class="sec-num" style="color:var(--accent-br)">&mdash;</span><div><div class="tag">Bottom line</div><h2>What the decision actually is</h2></div></div>
-        <p class="lead-line">On this version&rsquo;s assumptions the programme is no longer a strategic bet &mdash; it is cash-generative from month 5 and finishes the two years +$2.2M. But that result is carried by one decision, so the honesty of the model now lives in one question.</p>
-        <p>The whole upside rests on the <strong>1.75% top-up fee holding without depressing activation</strong>. If users accept it, the economics are strong and the remaining work is executional &mdash; confirm the $3 KYC cost, hold Gnosis SLA risk in check, keep CAC at $7, and manage the $2.5M collateral lock-up. If the fee has to come down to protect growth, the real answer sits between the two columns in section 6.</p>
-        <div class="pull">The model no longer asks whether the programme can work. It asks whether users will pay 1.75% to load their card &mdash; and that is a question to test with real customers, not to settle in a spreadsheet.</div>
+        <p>On these assumptions the programme is cash-generative from month 5 and finishes the two years at +$2.2M. That result depends almost entirely on one input.</p>
+        <p>The upside rests on the <strong>1.75% top-up fee holding without depressing activation</strong>. If it holds, the remaining work is executional: confirm the $3 KYC cost, keep Gnosis SLA risk in check, hold CAC at $7, and fund the $2.5M collateral lock-up. If the fee has to come down, the result sits between the two columns in section 6. That is a question to test with users, not to settle in the model.</p>
       </div>
     </div>
   </section>
@@ -655,8 +654,8 @@
     // break-even marker
     var bx=mL+beIndex*bw+bw/2;
     svg.appendChild(el('line',{x1:bx,x2:bx,y1:mT,y2:H-mB,stroke:css('--accent-br'),'stroke-width':1.5,'stroke-dasharray':'4 4',opacity:.9}));
-    var bt=el('text',{x:bx+6,y:mT+14,class:'axis-txt',fill:css('--accent-br'),'font-weight':600}); bt.textContent='Break-even'; svg.appendChild(bt);
-    var bt2=el('text',{x:bx+6,y:mT+28,class:'axis-txt',fill:css('--accent-br')}); bt2.textContent='M5'; svg.appendChild(bt2);
+    var bt=el('text',{x:bx+6,y:mT+14,class:'axis-txt','font-weight':600}); bt.style.fill=css('--accent-br'); bt.textContent='Break-even'; svg.appendChild(bt);
+    var bt2=el('text',{x:bx+6,y:mT+28,class:'axis-txt'}); bt2.style.fill=css('--accent-br'); bt2.textContent='M5'; svg.appendChild(bt2);
   }
 
   // ---------- LINE / AREA HELPERS ----------
@@ -714,9 +713,9 @@
     // recovery marker \u2014 first month cumulative is back to zero (M9)
     var rIdx=8;
     svg.appendChild(el('line',{x1:x(rIdx),x2:x(rIdx),y1:mT,y2:H-mB,stroke:css('--accent-br'),'stroke-width':1,'stroke-dasharray':'3 3',opacity:.85}));
-    var rt=el('text',{x:x(rIdx)+5,y:mT+11,class:'axis-txt',fill:css('--accent-br'),'font-weight':600}); rt.textContent='Recovered M9'; svg.appendChild(rt);
+    var rt=el('text',{x:x(rIdx)+5,y:mT+11,class:'axis-txt','font-weight':600}); rt.style.fill=css('--accent-br'); rt.textContent='Recovered M9'; svg.appendChild(rt);
     svg.appendChild(el('circle',{cx:x(23),cy:y(D.cumnet[23]),r:3.5,fill:css('--profit')}));
-    var et=el('text',{x:x(23),y:y(D.cumnet[23])-8,'text-anchor':'end',class:'axis-txt',fill:css('--profit'),'font-weight':600}); et.textContent='+$2.2M'; svg.appendChild(et);
+    var et=el('text',{x:x(23),y:y(D.cumnet[23])-8,'text-anchor':'end',class:'axis-txt','font-weight':600}); et.style.fill=css('--profit'); et.textContent='+$2.2M'; svg.appendChild(et);
     // per-month hover bands
     var sp=iw/(D.cumnet.length-1);
     D.cumnet.forEach(function(v,i){
@@ -739,14 +738,14 @@
     var total=items.reduce(function(a,d){return a+d.v;},0);
     items.forEach(function(d,i){
       var cy=mT+i*rowH+rowH/2;
-      var lbl=el('text',{x:mL-12,y:cy+4,'text-anchor':'end',class:'axis-txt'}); lbl.setAttribute('fill',css('--ink')); lbl.setAttribute('font-size','12'); lbl.textContent=d.n; svg.appendChild(lbl);
+      var lbl=el('text',{x:mL-12,y:cy+4,'text-anchor':'end',class:'axis-txt'}); lbl.style.fill=css('--ink'); lbl.setAttribute('font-size','12'); lbl.setAttribute('font-weight','500'); lbl.textContent=d.n; svg.appendChild(lbl);
       var bh=Math.min(rowH*0.56,26);
       var full=iw*(d.v/max);
       svg.appendChild(el('rect',{x:mL,y:cy-bh/2,width:iw,height:bh,rx:3,fill:css('--hair'),opacity:.5}));
       var bar=el('rect',{x:mL,y:cy-bh/2,width:full,height:bh,rx:3,fill:d.c||css('--accent')});
       if(!reduce){ bar.style.animation='chartFade .6s ease'; }
       svg.appendChild(bar);
-      var val=el('text',{x:mL+full+8,y:cy+4,class:'axis-txt'}); val.setAttribute('fill',css('--muted')); val.setAttribute('font-size','12'); val.textContent=money(d.v); svg.appendChild(val);
+      var val=el('text',{x:mL+full+8,y:cy+4,class:'axis-txt'}); val.style.fill=css('--ink'); val.setAttribute('font-size','12'); val.setAttribute('font-weight','500'); val.textContent=money(d.v); svg.appendChild(val);
       // full-row transparent hit for hovering
       var hit=el('rect',{x:mL,y:cy-rowH/2,width:iw,height:rowH,fill:'transparent'});
       tip(hit,
