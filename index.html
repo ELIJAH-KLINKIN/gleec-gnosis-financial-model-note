@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Executive briefing on the Gleec / Gnosis Pay card financial model (v48).">
+<meta name="color-scheme" content="light dark">
+<title>Gleec &times; Gnosis Pay &mdash; The Card Programme as a Decision</title>
+<style>
+  :root {
+    --paper:      #F6F6F3;
+    --surface:    #FFFFFF;
+    --raised:     #FCFCFA;
+    --ink:        #182420;
+    --muted:      #5B665F;
+    --faint:      #8A938C;
+    --hair:       #E2E3DC;
+    --hair-strong:#D2D4CB;
+    --accent:     #0E5C43;
+    --accent-br:  #18A67C;
+    --profit:     #1C8A5C;
+    --profit-fill:#1C8A5C1f;
+    --loss:       #B4472E;
+    --loss-fill:  #B4472E1f;
+    --brass:      #AD8038;
+    --brass-fill: #AD80381f;
+    --shadow:     0 1px 2px rgba(24,36,32,.04), 0 8px 30px rgba(24,36,32,.05);
+    --serif: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    --mono:  ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --measure: 42rem;
+    --wide: 62rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#0F1613; --surface:#151E19; --raised:#18221C;
+      --ink:#E9ECE4; --muted:#9BA79D; --faint:#6E7A72;
+      --hair:#242F28; --hair-strong:#2E3A32;
+      --accent:#2FBD8C; --accent-br:#43D3A0;
+      --profit:#3BC585; --profit-fill:#3BC58522;
+      --loss:#E0785C; --loss-fill:#E0785C22;
+      --brass:#D2A659; --brass-fill:#D2A65922;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#F6F6F3; --surface:#FFFFFF; --raised:#FCFCFA;
+    --ink:#182420; --muted:#5B665F; --faint:#8A938C;
+    --hair:#E2E3DC; --hair-strong:#D2D4CB;
+    --accent:#0E5C43; --accent-br:#18A67C;
+    --profit:#1C8A5C; --profit-fill:#1C8A5C1f;
+    --loss:#B4472E; --loss-fill:#B4472E1f;
+    --brass:#AD8038; --brass-fill:#AD80381f;
+    --shadow:0 1px 2px rgba(24,36,32,.04), 0 8px 30px rgba(24,36,32,.05);
+  }
+  :root[data-theme="dark"] {
+    --paper:#0F1613; --surface:#151E19; --raised:#18221C;
+    --ink:#E9ECE4; --muted:#9BA79D; --faint:#6E7A72;
+    --hair:#242F28; --hair-strong:#2E3A32;
+    --accent:#2FBD8C; --accent-br:#43D3A0;
+    --profit:#3BC585; --profit-fill:#3BC58522;
+    --loss:#E0785C; --loss-fill:#E0785C22;
+    --brass:#D2A659; --brass-fill:#D2A65922;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  .wrap { max-width:var(--wide); margin:0 auto; padding:0 clamp(1.1rem,4vw,2.5rem); }
+  .measure { max-width:var(--measure); }
+
+  h1,h2,h3 { font-family:var(--serif); font-weight:600; letter-spacing:-.01em; text-wrap:balance; margin:0; }
+  p { margin:0 0 1.05rem; }
+  strong { font-weight:600; }
+  a { color:var(--accent); }
+
+  .eyebrow {
+    font-family:var(--mono); font-size:.72rem; font-weight:500;
+    letter-spacing:.22em; text-transform:uppercase; color:var(--accent);
+  }
+  .num { font-family:var(--mono); font-variant-numeric:tabular-nums; }
+
+  /* ---------- MASTHEAD ---------- */
+  .mast { border-bottom:1px solid var(--hair); }
+  .mast-inner { padding:clamp(2.4rem,6vw,4.2rem) 0 clamp(1.8rem,4vw,2.8rem); }
+  .mast .kicker { display:flex; align-items:center; gap:.8rem; margin-bottom:1.6rem; flex-wrap:wrap; }
+  .mast .kicker .dot { width:7px; height:7px; border-radius:50%; background:var(--accent-br); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent-br) 18%, transparent); }
+  .mast h1 {
+    font-size:clamp(2.3rem,6.2vw,4rem); line-height:1.02; margin:0 0 1.1rem;
+    max-width:16ch;
+  }
+  .mast .lede { font-size:clamp(1.05rem,2.4vw,1.28rem); color:var(--muted); max-width:40rem; line-height:1.5; }
+  .mast .meta { display:flex; gap:1.6rem 2.4rem; flex-wrap:wrap; margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--hair); }
+  .mast .meta div { display:flex; flex-direction:column; gap:.25rem; }
+  .mast .meta .k { font-family:var(--mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); }
+  .mast .meta .v { font-size:.95rem; }
+
+  /* ---------- VERDICT STRIP ---------- */
+  .verdict { background:var(--surface); border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); }
+  .kpis { display:grid; grid-template-columns:repeat(6,1fr); }
+  .kpi { padding:1.5rem clamp(.8rem,2vw,1.4rem); border-right:1px solid var(--hair); display:flex; flex-direction:column; gap:.5rem; }
+  .kpi:last-child { border-right:0; }
+  .kpi .label { font-family:var(--mono); font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); line-height:1.3; min-height:2.6em; }
+  .kpi .figure { font-family:var(--serif); font-size:clamp(1.5rem,3.4vw,2.1rem); font-weight:600; line-height:1; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+  .kpi .sub { font-size:.78rem; color:var(--muted); }
+  .kpi.pos .figure { color:var(--profit); }
+  .kpi.neg .figure { color:var(--loss); }
+  .kpi.cash .figure { color:var(--brass); }
+  @media (max-width:860px){ .kpis{ grid-template-columns:repeat(3,1fr);} .kpi:nth-child(3){border-right:0;} .kpi:nth-child(1),.kpi:nth-child(2),.kpi:nth-child(3){border-bottom:1px solid var(--hair);} }
+  @media (max-width:520px){ .kpis{ grid-template-columns:repeat(2,1fr);} .kpi{border-right:1px solid var(--hair)!important;} .kpi:nth-child(odd){border-right:1px solid var(--hair);} .kpi:nth-child(even){border-right:0;} .kpi:nth-child(-n+4){border-bottom:1px solid var(--hair);} }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding:clamp(2.6rem,6vw,4.6rem) 0; border-bottom:1px solid var(--hair); }
+  .sec-head { display:flex; gap:1.1rem; align-items:baseline; margin-bottom:1.8rem; }
+  .sec-num { font-family:var(--mono); font-size:.8rem; color:var(--accent); font-weight:500; letter-spacing:.05em; padding-top:.4rem; min-width:2.2rem; }
+  .sec-head h2 { font-size:clamp(1.5rem,3.6vw,2.15rem); line-height:1.1; }
+  .sec-head .tag { font-family:var(--mono); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:.5rem; }
+  .body-copy { color:var(--ink); }
+  .body-copy p { color:color-mix(in srgb, var(--ink) 86%, var(--muted)); }
+  .lead-line { font-family:var(--serif); font-size:clamp(1.25rem,2.8vw,1.55rem); line-height:1.35; letter-spacing:-.01em; color:var(--ink); margin-bottom:1.4rem; text-wrap:balance; }
+
+  .pull { border-left:2px solid var(--accent); padding:.2rem 0 .2rem 1.3rem; margin:1.6rem 0; font-family:var(--serif); font-size:1.15rem; line-height:1.45; color:var(--ink); }
+
+  /* ---------- PANELS / CHARTS ---------- */
+  .panel { background:var(--surface); border:1px solid var(--hair); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; }
+  .panel-head { padding:1.3rem 1.5rem 1rem; border-bottom:1px solid var(--hair); }
+  .panel-head h3 { font-size:1.15rem; margin-bottom:.35rem; }
+  .panel-head .desc { font-size:.85rem; color:var(--muted); line-height:1.45; }
+  .panel-body { padding:1.2rem 1.2rem .6rem; }
+  .chart-wrap { width:100%; overflow-x:auto; }
+  svg.chart { display:block; width:100%; height:auto; }
+  .legend { display:flex; gap:1.3rem 1.5rem; flex-wrap:wrap; padding:.4rem 1.5rem 1.3rem; }
+  .legend span { display:inline-flex; align-items:center; gap:.5rem; font-family:var(--mono); font-size:.72rem; letter-spacing:.03em; color:var(--muted); }
+  .legend i { width:14px; height:3px; border-radius:2px; display:inline-block; }
+  .legend i.sq { width:11px; height:11px; border-radius:3px; }
+
+  .grid-line { stroke:var(--hair); stroke-width:1; }
+  .axis-txt { font-family:var(--mono); font-size:11px; fill:var(--faint); }
+  .axis-txt.mid { font-size:10px; }
+
+  /* ---------- DATA TABLES ---------- */
+  .tbl-wrap { overflow-x:auto; border:1px solid var(--hair); border-radius:12px; background:var(--surface); box-shadow:var(--shadow); }
+  table { border-collapse:collapse; width:100%; font-size:.9rem; min-width:20rem; }
+  th,td { text-align:left; padding:.85rem 1.1rem; border-bottom:1px solid var(--hair); vertical-align:top; }
+  thead th { font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); font-weight:500; background:var(--raised); }
+  tbody tr:last-child td { border-bottom:0; }
+  td.n, th.n { font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  td .cell-note { display:block; color:var(--muted); font-size:.82rem; margin-top:.15rem; }
+  .row-pos td.val { color:var(--profit); }
+  .row-neg td.val { color:var(--loss); }
+
+  /* spec grid */
+  .spec { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); border-radius:12px; overflow:hidden; }
+  .spec div { background:var(--surface); padding:1.1rem 1.2rem; display:flex; flex-direction:column; gap:.35rem; }
+  .spec .k { font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); }
+  .spec .v { font-family:var(--serif); font-size:1.35rem; font-weight:600; font-variant-numeric:tabular-nums; }
+  .spec .u { font-size:.76rem; color:var(--muted); }
+  @media (max-width:720px){ .spec{ grid-template-columns:repeat(2,1fr);} }
+
+  /* two-up */
+  .two-up { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  @media (max-width:820px){ .two-up{ grid-template-columns:1fr;} }
+
+  /* callout cards */
+  .cards { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin:1.6rem 0; }
+  @media (max-width:720px){ .cards{ grid-template-columns:1fr;} }
+  .card { background:var(--surface); border:1px solid var(--hair); border-radius:12px; padding:1.3rem 1.4rem; box-shadow:var(--shadow); }
+  .card h4 { font-family:var(--serif); font-size:1.08rem; margin:0 0 .5rem; display:flex; align-items:center; gap:.6rem; }
+  .card h4 .swatch { width:9px; height:9px; border-radius:50%; flex:none; }
+  .card p { font-size:.9rem; color:var(--muted); margin:0; line-height:1.5; }
+  .card .big { font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:1.5rem; font-weight:500; color:var(--ink); display:block; margin:.3rem 0 .55rem; }
+
+  /* flags list */
+  .flags { display:flex; flex-direction:column; gap:.9rem; }
+  .flag { display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:start; padding:1.1rem 1.3rem; background:var(--surface); border:1px solid var(--hair); border-left:2px solid var(--brass); border-radius:10px; }
+  .flag .mark { font-family:var(--mono); font-size:.72rem; color:var(--brass); font-weight:600; letter-spacing:.05em; padding-top:.15rem; }
+  .flag h4 { font-family:var(--sans); font-size:.98rem; font-weight:600; margin:0 0 .3rem; }
+  .flag p { margin:0; font-size:.88rem; color:var(--muted); line-height:1.5; }
+
+  /* bottom line */
+  .bottom { background:var(--ink); color:var(--paper); border-bottom:0; }
+  .bottom .eyebrow { color:var(--accent-br); }
+  .bottom h2 { color:var(--paper); }
+  .bottom .lead-line { color:var(--paper); }
+  .bottom .body-copy p { color:color-mix(in srgb, var(--paper) 82%, var(--muted)); }
+  .bottom .pull { color:var(--paper); border-color:var(--accent-br); }
+
+  footer { padding:2.4rem 0 3rem; }
+  footer .fine { font-family:var(--mono); font-size:.72rem; color:var(--faint); line-height:1.7; letter-spacing:.02em; }
+
+  /* Reveal is gated on the .js class so content is ALWAYS visible if scripting is
+     unavailable or the observer never fires — never a permanently blank section. */
+  .reveal { transition:opacity .7s ease, transform .7s ease; }
+  html.js .reveal { opacity:0; transform:translateY(14px); }
+  html.js .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce){ html.js .reveal{ opacity:1; transform:none; transition:none;} }
+
+  .inline-fig { font-family:var(--mono); font-variant-numeric:tabular-nums; font-weight:500; color:var(--ink); }
+
+  /* Charts draw at final geometry; this only fades them in. No 'to' keyframe, so the
+     resting/final state is always the element's own opacity — never permanently hidden. */
+  @keyframes chartFade { from { opacity: 0; } }
+
+  /* Interactive hover tooltip */
+  svg .hit { cursor:pointer; }
+  svg rect.hit:hover { opacity:1; }
+  svg circle.hit { fill:transparent; pointer-events:all; transition:fill .1s ease; }
+  svg circle.hit:hover { fill:color-mix(in srgb, var(--accent-br) 26%, transparent); }
+  .chart-tip {
+    position:fixed; z-index:60; pointer-events:none; opacity:0; transform:translateY(3px);
+    transition:opacity .12s ease, transform .12s ease;
+    background:var(--surface); color:var(--ink);
+    border:1px solid var(--hair-strong); border-radius:9px; box-shadow:var(--shadow);
+    padding:.5rem .68rem; font-family:var(--mono); white-space:nowrap; max-width:min(78vw,20rem);
+  }
+  .chart-tip.on { opacity:1; transform:none; }
+  .chart-tip .tip-k { display:block; color:var(--faint); font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.22rem; }
+  .chart-tip .tip-v { font-size:.98rem; font-weight:600; font-variant-numeric:tabular-nums; }
+  .chart-tip .tip-v.pos { color:var(--profit); }
+  .chart-tip .tip-v.neg { color:var(--loss); }
+  .chart-tip .tip-row { display:flex; align-items:center; justify-content:space-between; gap:1.1rem; font-size:.8rem; margin-top:.2rem; }
+  .chart-tip .tip-row .rk { color:var(--muted); display:inline-flex; align-items:center; gap:.4rem; }
+  .chart-tip .tip-row .rk i { width:8px; height:8px; border-radius:2px; display:inline-block; }
+  .chart-tip .tip-row .rv { font-variant-numeric:tabular-nums; font-weight:500; }
+
+  /* ---------- MODEL COMPARISON ---------- */
+  .levers { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin:0 0 1.6rem; }
+  @media (max-width:760px){ .levers{ grid-template-columns:repeat(2,1fr);} }
+  .lever { background:var(--surface); border:1px solid var(--hair); border-radius:11px; padding:1rem 1.1rem; box-shadow:var(--shadow); }
+  .lever .lk { font-family:var(--mono); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); display:block; margin-bottom:.55rem; line-height:1.35; }
+  .lever .lv { font-family:var(--serif); font-size:1.1rem; display:flex; align-items:baseline; gap:.45rem; flex-wrap:wrap; }
+  .lever .lv .old { color:var(--muted); text-decoration:line-through; text-decoration-thickness:1px; font-variant-numeric:tabular-nums; font-size:.95rem; }
+  .lever .lv .new { color:var(--accent); font-weight:600; font-variant-numeric:tabular-nums; }
+  .lever .lv .arw { color:var(--faint); font-family:var(--mono); font-size:.85rem; }
+  .lever.flat .new { color:var(--ink); }
+
+  .cmp-wrap { overflow-x:auto; border:1px solid var(--hair); border-radius:12px; background:var(--surface); box-shadow:var(--shadow); }
+  table.cmp { border-collapse:collapse; width:100%; min-width:34rem; font-size:.94rem; }
+  table.cmp th, table.cmp td { padding:.9rem 1.2rem; border-bottom:1px solid var(--hair); text-align:left; vertical-align:middle; }
+  table.cmp thead th { font-family:var(--mono); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); font-weight:500; background:var(--raised); }
+  table.cmp td.n, table.cmp th.n { font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap; }
+  table.cmp tbody tr:last-child td { border-bottom:0; }
+  table.cmp .colnew { background:color-mix(in srgb, var(--accent) 7%, transparent); border-left:1px solid color-mix(in srgb, var(--accent) 22%, transparent); border-right:1px solid color-mix(in srgb, var(--accent) 22%, transparent); }
+  table.cmp thead .colnew { border-top:1px solid color-mix(in srgb, var(--accent) 22%, transparent); }
+  table.cmp tbody tr:last-child .colnew { border-bottom:1px solid color-mix(in srgb, var(--accent) 22%, transparent); }
+  table.cmp td.up { color:var(--profit); font-weight:600; }
+  table.cmp td.neg { color:var(--loss); }
+  table.cmp td.was { color:var(--muted); }
+  table.cmp .note { display:block; font-family:var(--sans); font-size:.72rem; color:var(--faint); font-variant-numeric:normal; margin-top:.12rem; font-weight:400; }
+</style>
+</head>
+<body>
+<header class="mast">
+  <div class="wrap mast-inner">
+    <h1>The card programme, read as a decision.</h1>
+    <p class="lede">A plain-language walk through the model &mdash; what it assumes, why the base case now clears break-even in month 5, and what repricing the top-up fee did to the economics.</p>
+    <div class="meta">
+      <div><span class="k">Horizon</span><span class="v num">24 months &middot; Aug 2026 &rarr; Jul 2028</span></div>
+      <div><span class="k">Entity</span><span class="v">Canadian MSB &middot; virtual cards only</span></div>
+      <div><span class="k">Prepared by</span><span class="v num">Ilya Klinkin &middot; July 2026 &middot; for senior leadership</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="verdict">
+  <div class="wrap" style="padding:0;">
+    <div class="kpis">
+      <div class="kpi pos"><span class="label">Break-even</span><span class="figure">M5</span><span class="sub">first positive month</span></div>
+      <div class="kpi pos"><span class="label">Losses recovered</span><span class="figure">M9</span><span class="sub">cumulative back to zero</span></div>
+      <div class="kpi pos"><span class="label">M24 monthly net</span><span class="figure">+$230k</span><span class="sub">strong run-rate</span></div>
+      <div class="kpi pos"><span class="label">24-mo cumulative</span><span class="figure">+$2.2M</span><span class="sub">cash-generative</span></div>
+      <div class="kpi cash"><span class="label">Peak cash need</span><span class="figure">$2.5M</span><span class="sub">now all collateral</span></div>
+      <div class="kpi"><span class="label">Blended sub fee</span><span class="figure">$5.70</span><span class="sub">per active card / mo</span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- 1. THESIS -->
+  <section>
+    <div class="wrap">
+      <div class="measure body-copy reveal">
+        <div class="sec-head"><span class="sec-num">01</span><div><div class="tag">The premise</div><h2>A decision model, not a sales model</h2></div></div>
+        <p class="lead-line">The model&rsquo;s job is not to make the programme look good. It is to answer one question honestly: can a paid Gnosis Pay card programme make commercial and operational sense for Gleec once every real cost is counted?</p>
+        <p>&ldquo;Every real cost&rdquo; means provider fees, Visa costs, fraud and FinCrime operations, support headcount, acquisition spend and collateral &mdash; all included before the answer is read. The model is fair precisely <em>because</em> it does not force a positive result.</p>
+        <p>In the earlier version, at the current <span class="inline-fig">$7</span> acquisition cost, the answer was uncomfortable: break-even only in month 18, cumulatively negative across the two years. This updated model reprices the customer top-up fee from a break-even <span class="inline-fig">0.25%</span> to <span class="inline-fig">1.75%</span> &mdash; turning top-up from a neutral pass-through into the largest single revenue line. With that one change, break-even moves to <strong>month 5</strong>, the early losses are recovered by <strong>month 9</strong>, and the two years finish <strong>+$2.2M</strong> cumulatively.</p>
+        <div class="pull">Gnosis Pay is treated as the card-programme infrastructure provider. Gleec keeps ownership of its user relationship, support intake, governance, evidence quality and residual business risk.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. BASE CASE -->
+  <section>
+    <div class="wrap">
+      <div class="measure body-copy" style="margin-bottom:1.8rem;">
+        <div class="sec-head"><span class="sec-num">02</span><div><div class="tag">What is being modelled</div><h2>The base case, in one screen</h2></div></div>
+        <p>Standard Fintech Controls. Virtual cards only. Physical cards excluded. The programme scales to a mid-size active base by month 24 &mdash; enough volume to be real, conservative enough to be defensible.</p>
+      </div>
+      <div class="spec reveal">
+        <div><span class="k">Issued cards &middot; M24</span><span class="v num">60,000</span><span class="u">from 500 at launch</span></div>
+        <div><span class="k">Active cards &middot; M24</span><span class="v num">30,000</span><span class="u">transacted in last 3 mo</span></div>
+        <div><span class="k">Spend / active / mo</span><span class="v num">$500</span><span class="u">held flat across horizon</span></div>
+        <div><span class="k">Monthly volume &middot; M24</span><span class="v num">$15M</span><span class="u">30k &times; $500</span></div>
+        <div><span class="k">Acquisition cost</span><span class="v num">$7</span><span class="u">per issued card (CAC / referral)</span></div>
+        <div><span class="k">Top-up fee</span><span class="v num">1.75%</span><span class="u">customer fee, up from 0.25%</span></div>
+        <div><span class="k">Top-up net margin</span><span class="v num">1.50%</span><span class="u">1.75% fee &minus; 0.25% provider cost</span></div>
+        <div><span class="k">Collateral</span><span class="v num">5 days</span><span class="u">of card volume, at 8% cost of capital</span></div>
+        <div><span class="k">Interchange (gross)</span><span class="v num">0.47%</span><span class="u">regulated-aware build-up</span></div>
+        <div><span class="k">Free tier</span><span class="v num">None</span><span class="u">subscription is the base</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THE P&L STORY -->
+  <section>
+    <div class="wrap">
+      <div class="measure body-copy" style="margin-bottom:1.6rem;">
+        <div class="sec-head"><span class="sec-num">03</span><div><div class="tag">The main P&amp;L</div><h2>The shape of the first two years</h2></div></div>
+        <p>The Monthly Model is the real P&amp;L. Each bar below is a single month&rsquo;s net profit or loss after <em>all</em> loaded costs &mdash; provider fees, Visa, staff, risk operations, collateral financing and acquisition. Only the first four months are red; from <strong>month 5</strong> the programme is profitable every month, and the run-rate climbs to <strong>+$230k</strong> by month 24 as the active base scales.</p>
+      </div>
+      <div class="panel reveal">
+        <div class="panel-head">
+          <h3>Monthly net profit / loss after loaded costs</h3>
+          <div class="desc">24 months. Bars below the line are loss months; above, profit. Break-even at month 5.</div>
+        </div>
+        <div class="panel-body"><div class="chart-wrap"><svg id="chartNet" class="chart" viewBox="0 0 960 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Monthly net profit and loss bar chart crossing zero at month 5"></svg></div></div>
+        <div class="legend">
+          <span><i class="sq" style="background:var(--loss)"></i> Loss month</span>
+          <span><i class="sq" style="background:var(--profit)"></i> Profit month</span>
+          <span><i style="background:var(--accent-br)"></i> Break-even &middot; M5</span>
+        </div>
+      </div>
+
+      <div class="two-up" style="margin-top:1.5rem;">
+        <div class="panel reveal">
+          <div class="panel-head"><h3>Revenue vs. loaded cost</h3><div class="desc">Revenue overtakes cost at month 5 and the gap widens steadily &mdash; the shaded band is monthly profit.</div></div>
+          <div class="panel-body"><div class="chart-wrap"><svg id="chartRC" class="chart" viewBox="0 0 470 320" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Revenue and cost lines, revenue overtaking cost at month 5"></svg></div></div>
+          <div class="legend"><span><i style="background:var(--accent-br)"></i> Revenue</span><span><i style="background:var(--muted)"></i> Loaded cost</span></div>
+        </div>
+        <div class="panel reveal">
+          <div class="panel-head"><h3>Cumulative net result</h3><div class="desc">The running sum of monthly results. A shallow early dip, recovered by month 9, then compounding to +$2.2M.</div></div>
+          <div class="panel-body"><div class="chart-wrap"><svg id="chartCum" class="chart" viewBox="0 0 470 320" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cumulative net result area chart recovering by month 9 and rising to 2.2 million"></svg></div></div>
+          <div class="legend"><span><i class="sq" style="background:var(--profit)"></i> Cumulative result</span><span class="num" style="color:var(--muted)">dip &asymp; &minus;$102k &middot; M4</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HOW IT EARNS -->
+  <section>
+    <div class="wrap">
+      <div class="measure body-copy" style="margin-bottom:1.6rem;">
+        <div class="sec-head"><span class="sec-num">04</span><div><div class="tag">Revenue</div><h2>How the model earns money</h2></div></div>
+        <p>Two lines now carry the model. The <strong>repriced top-up fee</strong> at <span class="inline-fig">1.75%</span> is the single largest source &mdash; <span class="inline-fig">$300k</span>/mo at month 24 &mdash; and the <strong>monthly card subscription</strong> is the stable base: three paid tiers ($3 / $9 / $15) blending at 65 / 25 / 10 to a weighted <span class="inline-fig">$5.70</span> per active card.</p>
+        <p>Interchange is regulated-aware: a <span class="inline-fig">0.47%</span> gross pool, on which Gleec earns Gnosis&rsquo;s revenue share in marginal tiers &mdash; 50% up to $5M monthly volume, 70% from $5M&ndash;$20M, 75% above. The customer FX markup has been dropped to <span class="inline-fig">0%</span> (base), so FX is now negligible; ATM rounds out the mix. The customer is not charged for virtual card issuance.</p>
+      </div>
+      <div class="two-up">
+        <div class="panel reveal">
+          <div class="panel-head"><h3>Revenue composition at month 24</h3><div class="desc">Where the $536k of monthly revenue comes from &mdash; top-up now leads, ahead of subscription.</div></div>
+          <div class="panel-body"><div class="chart-wrap"><svg id="chartRevMix" class="chart" viewBox="0 0 470 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Revenue composition bar chart at month 24"></svg></div></div>
+        </div>
+        <div class="panel reveal">
+          <div class="panel-head"><h3>The subscription tiers</h3><div class="desc">The blended $5.70 is a weighted average &mdash; the stable recurring base beneath top-up.</div></div>
+          <div class="panel-body" style="padding-bottom:1.2rem;">
+            <div class="tbl-wrap" style="border:0; box-shadow:none;">
+              <table>
+                <thead><tr><th>Tier</th><th class="n">Price</th><th class="n">Mix</th><th class="n">Contrib.</th></tr></thead>
+                <tbody>
+                  <tr><td>Basic</td><td class="n">$3.00</td><td class="n">65%</td><td class="n">$1.95</td></tr>
+                  <tr><td>Plus</td><td class="n">$9.00</td><td class="n">25%</td><td class="n">$2.25</td></tr>
+                  <tr><td>Pro</td><td class="n">$15.00</td><td class="n">10%</td><td class="n">$1.50</td></tr>
+                  <tr style="font-weight:600;"><td>Weighted</td><td class="n">&mdash;</td><td class="n">100%</td><td class="n" style="color:var(--accent)">$5.70</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. COST LOGIC -->
+  <section>
+    <div class="wrap">
+      <div class="measure body-copy" style="margin-bottom:1.6rem;">
+        <div class="sec-head"><span class="sec-num">05</span><div><div class="tag">Cost</div><h2>Where the money goes</h2></div></div>
+        <p>Costs separate cleanly into provider fees, Visa &amp; wallet pass-through, launch costs, acquisition, collateral financing and Gleec-side operations. The largest lines are the Gnosis active-account and BIN-sponsor fees, Visa authorisation and cross-border fees, Gleec&rsquo;s own card-ops and risk staffing, and the top-up / bridge provider cost &mdash; now smaller, since the assumed top-up volume per user was halved to $500.</p>
+      </div>
+      <div class="panel reveal">
+        <div class="panel-head"><h3>Loaded cost composition at month 24</h3><div class="desc">$306k of monthly cost, by line. Provider fees and staffing lead; the bridge cost has roughly halved.</div></div>
+        <div class="panel-body"><div class="chart-wrap"><svg id="chartCostMix" class="chart" viewBox="0 0 960 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cost composition bar chart at month 24"></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. MODEL COMPARISON -->
+  <section>
+    <div class="wrap">
+      <div class="measure body-copy" style="margin-bottom:1.6rem;">
+        <div class="sec-head"><span class="sec-num">06</span><div><div class="tag">Before &amp; after</div><h2>What changed &mdash; and what it did</h2></div></div>
+        <p class="lead-line">The previous model treated top-up as a neutral pass-through. This one prices it as a real product. Everything else &mdash; growth, spend, subscription, collateral, CAC &mdash; is held constant, so the comparison isolates the effect of that decision.</p>
+      </div>
+
+      <div class="levers reveal">
+        <div class="lever"><span class="lk">Customer top-up fee</span><span class="lv"><span class="old">0.25%</span><span class="arw">&rarr;</span><span class="new">1.75%</span></span></div>
+        <div class="lever"><span class="lk">Customer FX markup</span><span class="lv"><span class="old">~1.13%</span><span class="arw">&rarr;</span><span class="new">0.00%</span></span></div>
+        <div class="lever"><span class="lk">Avg top-up / user / mo</span><span class="lv"><span class="old">$1,000</span><span class="arw">&rarr;</span><span class="new">$500</span></span></div>
+        <div class="lever flat"><span class="lk">Acquisition cost (CAC)</span><span class="lv"><span class="new">$7</span><span class="arw">&middot;</span><span style="font-size:.8rem;color:var(--faint);font-family:var(--mono)">unchanged</span></span></div>
+      </div>
+
+      <div class="cmp-wrap reveal">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th class="n">Previous &middot; v47</th>
+              <th class="n colnew">Updated &middot; v48</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Customer acquisition cost</td>
+              <td class="n was">$7 / issued card</td>
+              <td class="n colnew">$7 / issued card</td>
+            </tr>
+            <tr>
+              <td>Total 24-mo acquisition spend</td>
+              <td class="n was">$420k</td>
+              <td class="n colnew">$420k</td>
+            </tr>
+            <tr>
+              <td>Net top-up margin</td>
+              <td class="n was">0.00%<span class="note">neutral &middot; $0 / mo</span></td>
+              <td class="n colnew up">1.50%<span class="note">+$263k / mo at M24</span></td>
+            </tr>
+            <tr>
+              <td>Monthly operating break-even</td>
+              <td class="n was">Month 18</td>
+              <td class="n colnew up">Month 5</td>
+            </tr>
+            <tr>
+              <td>Cumulative losses recovered</td>
+              <td class="n was">Not within 24 mo</td>
+              <td class="n colnew up">Month 9</td>
+            </tr>
+            <tr>
+              <td>Month 12 monthly result</td>
+              <td class="n neg">&minus;$15k</td>
+              <td class="n colnew up">+$89k</td>
+            </tr>
+            <tr>
+              <td>Month 24 monthly result</td>
+              <td class="n was">+$21k</td>
+              <td class="n colnew up">+$230k</td>
+            </tr>
+            <tr>
+              <td>24-month cumulative result</td>
+              <td class="n neg">&minus;$334k</td>
+              <td class="n colnew up">+$2.2M</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="measure body-copy" style="margin-top:1.6rem;">
+        <p>The swing is almost entirely the top-up line. It hangs on one commercial judgement: <strong>will users accept a 1.75% fee to load their card?</strong> Top-up is high-friction &mdash; people will pay to spend but resent paying to fund. If churn stays low at 1.75%, the programme is strongly cash-generative. If the fee has to come down to protect activation, the result lands somewhere between these two columns. CAC discipline (holding the $7) remains the second lever.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. LIQUIDITY -->
+  <section>
+    <div class="wrap">
+      <div class="measure body-copy" style="margin-bottom:1.6rem;">
+        <div class="sec-head"><span class="sec-num">07</span><div><div class="tag">Liquidity</div><h2>The number that actually constrains us</h2></div></div>
+        <p>Now that the programme turns cash-positive so early, the liquidity picture is almost <em>purely</em> collateral. The 5-day security deposit climbs to <span class="inline-fig">$2.5M</span> by month 24; the only operating drag is a shallow <span class="inline-fig">&minus;$102k</span> dip in the first four months, recovered by month 9. So the <strong>peak cash need is ~$2.5M &mdash; essentially all collateral</strong>. The accounting cost of that deposit is small; the lock-up of the cash is the real constraint.</p>
+      </div>
+      <div class="panel reveal">
+        <div class="panel-head"><h3>Cumulative cash need &mdash; almost all collateral</h3><div class="desc">Over 24 months, the total cash need (ink) tracks the collateral ramp (brass); operating losses add only a thin early sliver.</div></div>
+        <div class="panel-body"><div class="chart-wrap"><svg id="chartCash" class="chart" viewBox="0 0 960 380" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cumulative cash need area chart reaching 2.5 million dollars, dominated by collateral"></svg></div></div>
+        <div class="legend">
+          <span><i class="sq" style="background:var(--brass)"></i> Collateral locked</span>
+          <span><i class="sq" style="background:var(--loss)"></i> Early operating deficit</span>
+          <span><i style="background:var(--ink)"></i> Total cash need</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. OPERATING LAYER + AVG USER -->
+  <section>
+    <div class="wrap">
+      <div class="two-up">
+        <div class="measure body-copy">
+          <div class="sec-head"><span class="sec-num">08</span><div><div class="tag">Operating layer</div><h2>Lean, but real</h2></div></div>
+          <p>The model does not pretend Gleec builds an issuer-grade fraud department on day one. Gnosis owns the core controls &mdash; KYC/AML, sanctions, transaction monitoring, fraud tooling, card blocking, chargebacks, disputes and scheme processes. Gleec owns the customer relationship: Level-1 intake, ticket quality, evidence collection, escalation, governance and residual risk.</p>
+          <p>Support scales at <span class="inline-fig">1 analyst / 3,000</span> active cards &mdash; about 10 analysts by month 24. As volume grows, disputes and fraud escalation should stop being informal favours and become defined roles with SLA tracking.</p>
+        </div>
+        <div class="measure body-copy">
+          <div class="sec-head"><span class="sec-num">09</span><div><div class="tag">Per-user view</div><h2>One reference month</h2></div></div>
+          <p>The Average User Economics tab reads a single month (currently month 12), not the full case. With top-up repriced, the average active user is now solidly positive after fully loaded costs &mdash; the top-up fee alone contributes about $10 per active user per month.</p>
+          <div class="tbl-wrap" style="margin-top:.4rem;">
+            <table>
+              <tbody>
+                <tr><td>Revenue / active user</td><td class="n val">$17.70</td></tr>
+                <tr><td>Cost / active user</td><td class="n val">$11.24</td></tr>
+                <tr class="row-pos"><td>Net after loaded costs</td><td class="n val">+$6.46</td></tr>
+                <tr class="row-pos"><td>Net before internal &amp; fraud alloc.</td><td class="n val">+$10.38</td></tr>
+                <tr><td>Top-up fee / active user</td><td class="n val" style="color:var(--accent)">$10.00</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. OPEN FLAGS -->
+  <section>
+    <div class="wrap">
+      <div class="measure body-copy" style="margin-bottom:1.6rem;">
+        <div class="sec-head"><span class="sec-num">10</span><div><div class="tag">Before any commercial decision</div><h2>What must be confirmed with Gnosis</h2></div></div>
+        <p>Most open questions won&rsquo;t destroy the model &mdash; but several can materially improve or worsen it. These are the ones to close before launch.</p>
+      </div>
+      <div class="flags reveal">
+        <div class="flag"><span class="mark">TOP-UP</span><div><h4>Will users accept a 1.75% top-up fee?</h4><p>The entire upside in this version rests here. Top-up is high-friction &mdash; a fee this size could depress activation or drive churn. Provider cost is 0.25%, so the net margin is 1.50%, but only if the fee holds. This is the single most important commercial assumption to validate.</p></div></div>
+        <div class="flag"><span class="mark">FX</span><div><h4>FX markup set to 0%</h4><p>This version drops the customer FX markup to 0% (base), so FX is no longer a revenue line. Reinstating even a small markup later is pure upside. Confirm Gleec can operationally set FX / ATM markups without contract friction.</p></div></div>
+        <div class="flag"><span class="mark">KYC</span><div><h4>KYC cost &mdash; $3 vs $0.50</h4><p>KYC is a major onboarding cost. The $0.50 figure likely refers to token sharing, not full identity checks. Reconfirm with Ari; the model must not conflate the two. Currently $3 per new user.</p></div></div>
+        <div class="flag"><span class="mark">SLA</span><div><h4>Fraud &amp; dispute SLA documents</h4><p>Needed before public launch &mdash; they shape support design and residual risk. Open launch-readiness flag.</p></div></div>
+        <div class="flag"><span class="mark">CASH</span><div><h4>Collateral days</h4><p>5 days creates a $2.5M lock-up at M24 &mdash; now the dominant liquidity need. Sensitivity also shows 3 and 4 days &mdash; a direct lever on peak cash.</p></div></div>
+        <div class="flag"><span class="mark">CARD</span><div><h4>Physical card economics</h4><p>Issuance, fulfilment, delivery and inventory risk. Deliberately excluded from the base case; revisit only with its own model.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM LINE -->
+  <section class="bottom">
+    <div class="wrap">
+      <div class="measure body-copy">
+        <div class="sec-head"><span class="sec-num" style="color:var(--accent-br)">&mdash;</span><div><div class="tag">Bottom line</div><h2>What the decision actually is</h2></div></div>
+        <p class="lead-line">On this version&rsquo;s assumptions the programme is no longer a strategic bet &mdash; it is cash-generative from month 5 and finishes the two years +$2.2M. But that result is carried by one decision, so the honesty of the model now lives in one question.</p>
+        <p>The whole upside rests on the <strong>1.75% top-up fee holding without depressing activation</strong>. If users accept it, the economics are strong and the remaining work is executional &mdash; confirm the $3 KYC cost, hold Gnosis SLA risk in check, keep CAC at $7, and manage the $2.5M collateral lock-up. If the fee has to come down to protect growth, the real answer sits between the two columns in section 6.</p>
+        <div class="pull">The model no longer asks whether the programme can work. It asks whether users will pay 1.75% to load their card &mdash; and that is a question to test with real customers, not to settle in a spreadsheet.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p class="fine">Source: Gleec / Gnosis Pay Cards Financial Model v48. Chart series and comparison metrics computed directly from the Monthly Model tab; the &ldquo;Previous&rdquo; column is the prior v47 base case. Key changes in this version: customer top-up fee 0.25% &rarr; 1.75%, customer FX markup ~1.13% &rarr; 0%, average monthly top-up per user $1,000 &rarr; $500; CAC held at $7. Figures are model outputs under stated assumptions, not forecasts or investment advice. Interchange is deliberately conservative under UK PSR fee caps; the programme is assessed through the Canadian MSB entity.</p>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  // Signal that scripting is live \u2014 the reveal animation's hidden state is gated on this,
+  // so any failure below still leaves every section fully visible.
+  document.documentElement.classList.add('js');
+  var M=['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12','M13','M14','M15','M16','M17','M18','M19','M20','M21','M22','M23','M24'];
+  var D={
+    net:[-39353,-32765,-20343,-9276,4392,13751,27419,36777,50905,60894,75192,89490,100349,113678,122698,136026,145046,158375,171704,180723,194052,203071,216400,229729],
+    rev:[4385,27903,51421,74940,98458,121976,145494,169013,192990,217139,241287,265436,287947,310459,332970,355481,377993,400504,423015,445527,468038,490549,513061,535572],
+    cost:[43738,60668,71764,84215,94066,108225,118076,132235,142086,156245,166096,175946,187598,196780,210272,219455,232947,242129,251312,264803,273986,287478,296660,305843],
+    cash:[60186,204694,336779,457797,565147,663139,747462,822427,914773,1026515,1138258,1250000,1354167,1458333,1562500,1666667,1770833,1875000,1979167,2083333,2187500,2291667,2395833,2500000],
+    coll:[20833,132576,244318,356061,467803,579545,691288,803030,914773,1026515,1138258,1250000,1354167,1458333,1562500,1666667,1770833,1875000,1979167,2083333,2187500,2291667,2395833,2500000]
+  };
+  // cumulative net
+  D.cumnet=[]; var s=0; for(var i=0;i<D.net.length;i++){ s+=D.net[i]; D.cumnet.push(s); }
+
+  var SVGNS='http://www.w3.org/2000/svg';
+  function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function el(name,attrs){ var e=document.createElementNS(SVGNS,name); for(var k in attrs){ e.setAttribute(k,attrs[k]); } return e; }
+  function money(v){ var a=Math.abs(v); var sign=v<0?'-':''; if(a>=1e6) return sign+'$'+(a/1e6).toFixed(a>=1e7?1:2)+'M'; if(a>=1e3) return sign+'$'+Math.round(a/1e3)+'k'; return sign+'$'+Math.round(a); }
+  // Exact, comma-grouped figure for tooltips.
+  function moneyFull(v){ var n=Math.round(v); return (n<0?'\u2212':'')+'$'+Math.abs(n).toLocaleString('en-US'); }
+  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function clear(svg){ while(svg.firstChild) svg.removeChild(svg.firstChild); }
+
+  // ---------- HOVER TOOLTIP ----------
+  var tipEl=null;
+  function ensureTip(){ if(!tipEl){ tipEl=document.createElement('div'); tipEl.className='chart-tip'; tipEl.setAttribute('role','status'); document.body.appendChild(tipEl); } return tipEl; }
+  function moveTip(e){ if(!tipEl) return; var pad=14, x=e.clientX+pad, y=e.clientY+pad, w=tipEl.offsetWidth, h=tipEl.offsetHeight; if(x+w>window.innerWidth-8) x=e.clientX-pad-w; if(x<8) x=8; if(y+h>window.innerHeight-8) y=e.clientY-pad-h; if(y<8) y=8; tipEl.style.left=x+'px'; tipEl.style.top=y+'px'; }
+  function showTip(e,html){ var t=ensureTip(); t.innerHTML=html; t.classList.add('on'); moveTip(e); }
+  function hideTip(){ if(tipEl) tipEl.classList.remove('on'); }
+  // Attach a tooltip to an SVG mark. `plain` also becomes a <title> for accessibility.
+  function tip(node,html,plain){
+    node.setAttribute('class',((node.getAttribute('class')||'')+' hit').trim());
+    node.addEventListener('mouseenter',function(e){ showTip(e,html); });
+    node.addEventListener('mousemove',moveTip);
+    node.addEventListener('mouseleave',hideTip);
+    if(plain){ var ti=el('title'); ti.textContent=plain; node.appendChild(ti); }
+  }
+  function pct(v,total){ return (total? (v/total*100):0).toFixed(1)+'%'; }
+
+  // ---------- NET P&L BARS ----------
+  function drawNet(){
+    var svg=document.getElementById('chartNet'); clear(svg);
+    var W=960,H=400, mL=54,mR=16,mT=18,mB=34;
+    var iw=W-mL-mR, ih=H-mT-mB;
+    var vals=D.net, max=Math.max.apply(null,vals), min=Math.min.apply(null,vals);
+    max=Math.max(max, 240000); min=Math.min(min,-50000);
+    function y(v){ return mT + (max-v)/(max-min)*ih; }
+    var zeroY=y(0);
+    // gridlines
+    var ticks=[-40000,0,60000,120000,180000,240000];
+    ticks.forEach(function(t){
+      svg.appendChild(el('line',{x1:mL,x2:W-mR,y1:y(t),y2:y(t),class:'grid-line'}));
+      var lbl=el('text',{x:mL-8,y:y(t)+3,'text-anchor':'end',class:'axis-txt'}); lbl.textContent=money(t); svg.appendChild(lbl);
+    });
+    // zero emphasis
+    svg.appendChild(el('line',{x1:mL,x2:W-mR,y1:zeroY,y2:zeroY,stroke:css('--hair-strong'),'stroke-width':1.5}));
+    var bw=iw/vals.length, pad=bw*0.22;
+    var beIndex=4; // M5
+    vals.forEach(function(v,i){
+      var x=mL+i*bw+pad;
+      var w=bw-pad*2;
+      var top=v>=0?y(v):zeroY;
+      var h=Math.abs(y(v)-zeroY);
+      var col=v>=0?css('--profit'):css('--loss');
+      // Drawn at final geometry \u2014 never depends on an animation frame to become visible.
+      var r=el('rect',{x:x,y:top,width:w,height:h,rx:2,fill:col,opacity:0.92});
+      if(!reduce){ r.style.animation='chartFade .6s ease'; }
+      svg.appendChild(r);
+      // Full-height transparent hit column so even thin bars near break-even are easy to hover.
+      var hit=el('rect',{x:mL+i*bw,y:mT,width:bw,height:H-mB-mT,fill:'transparent'});
+      tip(hit,
+        '<span class="tip-k">Month '+(i+1)+' &middot; '+(v>=0?'profit':'loss')+'</span><span class="tip-v '+(v>=0?'pos':'neg')+'">'+moneyFull(v)+'</span>',
+        'Month '+(i+1)+': '+moneyFull(v).replace('\u2212','-'));
+      svg.appendChild(hit);
+      if(i%2===1 || i===vals.length-1){
+        var lbl=el('text',{x:x+w/2,y:H-mB+16,'text-anchor':'middle',class:'axis-txt mid'}); lbl.textContent=M[i]; svg.appendChild(lbl);
+      }
+    });
+    // break-even marker
+    var bx=mL+beIndex*bw+bw/2;
+    svg.appendChild(el('line',{x1:bx,x2:bx,y1:mT,y2:H-mB,stroke:css('--accent-br'),'stroke-width':1.5,'stroke-dasharray':'4 4',opacity:.9}));
+    var bt=el('text',{x:bx+6,y:mT+14,class:'axis-txt',fill:css('--accent-br'),'font-weight':600}); bt.textContent='Break-even'; svg.appendChild(bt);
+    var bt2=el('text',{x:bx+6,y:mT+28,class:'axis-txt',fill:css('--accent-br')}); bt2.textContent='M5'; svg.appendChild(bt2);
+  }
+
+  // ---------- LINE / AREA HELPERS ----------
+  function pathFrom(pts){ return pts.map(function(p,i){ return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1); }).join(' '); }
+  // Path is already drawn solid; just fade it in. Never leaves the line hidden.
+  function animateStroke(p){ if(reduce) return; p.style.animation='chartFade .9s ease'; }
+
+  // ---------- REVENUE VS COST ----------
+  function drawRC(){
+    var svg=document.getElementById('chartRC'); clear(svg);
+    var W=470,H=320,mL=48,mR=14,mT=14,mB=28,iw=W-mL-mR,ih=H-mT-mB;
+    var max=Math.max(Math.max.apply(null,D.rev),Math.max.apply(null,D.cost))*1.05;
+    function x(i){ return mL+i/(D.rev.length-1)*iw; }
+    function y(v){ return mT+(1-v/max)*ih; }
+    [0,100000,200000,300000,400000,500000].forEach(function(t){ if(t>max)return; svg.appendChild(el('line',{x1:mL,x2:W-mR,y1:y(t),y2:y(t),class:'grid-line'})); var l=el('text',{x:mL-7,y:y(t)+3,'text-anchor':'end',class:'axis-txt'}); l.textContent=money(t); svg.appendChild(l); });
+    // gap fill: split at break-even (rev>cost) index 17
+    var revPts=D.rev.map(function(v,i){return [x(i),y(v)];});
+    var costPts=D.cost.map(function(v,i){return [x(i),y(v)];});
+    var gap=el('path',{d:pathFrom(revPts)+' '+costPts.slice().reverse().map(function(p){return 'L'+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ')+' Z', fill:css('--loss'),opacity:.10});
+    svg.appendChild(gap);
+    var cp=el('path',{d:pathFrom(costPts),fill:'none',stroke:css('--muted'),'stroke-width':2,'stroke-linejoin':'round'}); svg.appendChild(cp); animateStroke(cp);
+    var rp=el('path',{d:pathFrom(revPts),fill:'none',stroke:css('--accent-br'),'stroke-width':2.5,'stroke-linejoin':'round'}); svg.appendChild(rp); animateStroke(rp);
+    // endpoints
+    svg.appendChild(el('circle',{cx:x(23),cy:y(D.rev[23]),r:3.5,fill:css('--accent-br')}));
+    svg.appendChild(el('circle',{cx:x(23),cy:y(D.cost[23]),r:3.5,fill:css('--muted')}));
+    // per-month hover bands (revenue + cost + net)
+    var sp=iw/(D.rev.length-1);
+    D.rev.forEach(function(rv,i){
+      var net=rv-D.cost[i];
+      var hit=el('rect',{x:x(i)-sp/2,y:mT,width:sp,height:ih,fill:'transparent'});
+      tip(hit,
+        '<span class="tip-k">Month '+(i+1)+'</span>'+
+        '<div class="tip-row"><span class="rk"><i style="background:var(--accent-br)"></i>Revenue</span><span class="rv">'+moneyFull(rv)+'</span></div>'+
+        '<div class="tip-row"><span class="rk"><i style="background:var(--muted)"></i>Loaded cost</span><span class="rv">'+moneyFull(D.cost[i])+'</span></div>'+
+        '<div class="tip-row"><span class="rk">Net</span><span class="rv" style="color:var(--'+(net>=0?'profit':'loss')+')">'+moneyFull(net)+'</span></div>',
+        'Month '+(i+1)+' \u2014 revenue '+moneyFull(rv).replace('\u2212','-')+', cost '+moneyFull(D.cost[i]).replace('\u2212','-'));
+      svg.appendChild(hit);
+    });
+    ['M1','M12','M24'].forEach(function(m,k){ var idx=[0,11,23][k]; var l=el('text',{x:x(idx),y:H-8,'text-anchor':k===0?'start':(k===2?'end':'middle'),class:'axis-txt mid'}); l.textContent=m; svg.appendChild(l); });
+  }
+
+  // ---------- CUMULATIVE NET ----------
+  function drawCum(){
+    var svg=document.getElementById('chartCum'); clear(svg);
+    var W=470,H=320,mL=52,mR=16,mT=16,mB=28,iw=W-mL-mR,ih=H-mT-mB;
+    var min=-200000, max=2400000;
+    function x(i){ return mL+i/(D.cumnet.length-1)*iw; }
+    function y(v){ return mT+(max-v)/(max-min)*ih; }
+    [0,600000,1200000,1800000,2400000].forEach(function(t){ svg.appendChild(el('line',{x1:mL,x2:W-mR,y1:y(t),y2:y(t),class:'grid-line'})); var l=el('text',{x:mL-7,y:y(t)+3,'text-anchor':'end',class:'axis-txt'}); l.textContent=money(t); svg.appendChild(l); });
+    var pts=D.cumnet.map(function(v,i){return [x(i),y(v)];});
+    // positive area (profit) fills from the line down to the zero baseline
+    var area=el('path',{d:'M'+x(0)+' '+y(0)+' '+pathFrom(pts).slice(1)+' L'+x(23)+' '+y(0)+' Z',fill:css('--profit'),opacity:.12}); svg.appendChild(area);
+    svg.appendChild(el('line',{x1:mL,x2:W-mR,y1:y(0),y2:y(0),stroke:css('--hair-strong'),'stroke-width':1.5}));
+    var lp=el('path',{d:pathFrom(pts),fill:'none',stroke:css('--profit'),'stroke-width':2.5,'stroke-linejoin':'round'}); svg.appendChild(lp); animateStroke(lp);
+    // recovery marker \u2014 first month cumulative is back to zero (M9)
+    var rIdx=8;
+    svg.appendChild(el('line',{x1:x(rIdx),x2:x(rIdx),y1:mT,y2:H-mB,stroke:css('--accent-br'),'stroke-width':1,'stroke-dasharray':'3 3',opacity:.85}));
+    var rt=el('text',{x:x(rIdx)+5,y:mT+11,class:'axis-txt',fill:css('--accent-br'),'font-weight':600}); rt.textContent='Recovered M9'; svg.appendChild(rt);
+    svg.appendChild(el('circle',{cx:x(23),cy:y(D.cumnet[23]),r:3.5,fill:css('--profit')}));
+    var et=el('text',{x:x(23),y:y(D.cumnet[23])-8,'text-anchor':'end',class:'axis-txt',fill:css('--profit'),'font-weight':600}); et.textContent='+$2.2M'; svg.appendChild(et);
+    // per-month hover bands
+    var sp=iw/(D.cumnet.length-1);
+    D.cumnet.forEach(function(v,i){
+      var hit=el('rect',{x:x(i)-sp/2,y:mT,width:sp,height:ih,fill:'transparent'});
+      tip(hit,
+        '<span class="tip-k">Month '+(i+1)+' &middot; cumulative</span><span class="tip-v '+(v>=0?'pos':'neg')+'">'+moneyFull(v)+'</span>',
+        'Month '+(i+1)+' cumulative: '+moneyFull(v).replace('\u2212','-'));
+      svg.appendChild(hit);
+    });
+    ['M1','M12','M24'].forEach(function(m,k){ var idx=[0,11,23][k]; var l=el('text',{x:x(idx),y:H-8,'text-anchor':k===0?'start':(k===2?'end':'middle'),class:'axis-txt mid'}); l.textContent=m; svg.appendChild(l); });
+  }
+
+  // ---------- HORIZONTAL BAR (revenue mix) ----------
+  function drawHBar(svgId, items, W, unit){
+    var svg=document.getElementById(svgId); clear(svg);
+    var H=+svg.getAttribute('viewBox').split(' ')[3];
+    var mL=150,mR=64,mT=10,mB=10,iw=W-mL-mR;
+    var rowH=(H-mT-mB)/items.length;
+    var max=Math.max.apply(null,items.map(function(d){return d.v;}))*1.02;
+    var total=items.reduce(function(a,d){return a+d.v;},0);
+    items.forEach(function(d,i){
+      var cy=mT+i*rowH+rowH/2;
+      var lbl=el('text',{x:mL-12,y:cy+4,'text-anchor':'end',class:'axis-txt'}); lbl.setAttribute('fill',css('--ink')); lbl.setAttribute('font-size','12'); lbl.textContent=d.n; svg.appendChild(lbl);
+      var bh=Math.min(rowH*0.56,26);
+      var full=iw*(d.v/max);
+      svg.appendChild(el('rect',{x:mL,y:cy-bh/2,width:iw,height:bh,rx:3,fill:css('--hair'),opacity:.5}));
+      var bar=el('rect',{x:mL,y:cy-bh/2,width:full,height:bh,rx:3,fill:d.c||css('--accent')});
+      if(!reduce){ bar.style.animation='chartFade .6s ease'; }
+      svg.appendChild(bar);
+      var val=el('text',{x:mL+full+8,y:cy+4,class:'axis-txt'}); val.setAttribute('fill',css('--muted')); val.setAttribute('font-size','12'); val.textContent=money(d.v); svg.appendChild(val);
+      // full-row transparent hit for hovering
+      var hit=el('rect',{x:mL,y:cy-rowH/2,width:iw,height:rowH,fill:'transparent'});
+      tip(hit,
+        '<span class="tip-k">'+d.n+' &middot; '+pct(d.v,total)+' of total</span><span class="tip-v">'+moneyFull(d.v)+'</span>',
+        d.n+': '+moneyFull(d.v)+' ('+pct(d.v,total)+')');
+      svg.appendChild(hit);
+    });
+  }
+
+  // ---------- CASH NEED STACKED AREA ----------
+  function drawCash(){
+    var svg=document.getElementById('chartCash'); clear(svg);
+    var W=960,H=380,mL=64,mR=20,mT=20,mB=34,iw=W-mL-mR,ih=H-mT-mB;
+    var max=3000000;
+    function x(i){ return mL+i/(D.cash.length-1)*iw; }
+    function y(v){ return mT+(1-v/max)*ih; }
+    [0,1000000,2000000,3000000].forEach(function(t){ svg.appendChild(el('line',{x1:mL,x2:W-mR,y1:y(t),y2:y(t),class:'grid-line'})); var l=el('text',{x:mL-8,y:y(t)+3,'text-anchor':'end',class:'axis-txt'}); l.textContent=money(t); svg.appendChild(l); });
+    // deficit = cash - collateral (the operating loss portion). collateral sits on bottom.
+    var collPts=D.coll.map(function(v,i){return [x(i),y(v)];});
+    var totPts=D.cash.map(function(v,i){return [x(i),y(v)];});
+    // collateral area (bottom)
+    var collArea=el('path',{d:'M'+x(0)+' '+y(0)+' '+pathFrom(collPts).slice(1)+' L'+x(23)+' '+y(0)+' Z',fill:css('--brass'),opacity:.20}); svg.appendChild(collArea);
+    // deficit band between collateral and total
+    var band=el('path',{d:pathFrom(collPts)+' '+totPts.slice().reverse().map(function(p){return 'L'+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ')+' Z',fill:css('--loss'),opacity:.16}); svg.appendChild(band);
+    var cl=el('path',{d:pathFrom(collPts),fill:'none',stroke:css('--brass'),'stroke-width':2}); svg.appendChild(cl); animateStroke(cl);
+    var tl=el('path',{d:pathFrom(totPts),fill:'none',stroke:css('--ink'),'stroke-width':2.5}); svg.appendChild(tl); animateStroke(tl);
+    svg.appendChild(el('circle',{cx:x(23),cy:y(D.cash[23]),r:4,fill:css('--ink')}));
+    var et=el('text',{x:x(23)-8,y:y(D.cash[23])-10,'text-anchor':'end'}); et.setAttribute('font-size','14'); et.setAttribute('font-family',css('--mono')||'monospace'); et.setAttribute('font-weight','600'); et.setAttribute('fill',css('--ink')); et.textContent='$2.5M \u00b7 all collateral'; svg.appendChild(et);
+    // early operating dip \u2014 labelled in clear space above the curve, with a leader to the sliver
+    var dipX=mL+30, dipY=y(1720000);
+    var dipTx=x(4), dipTy=y((D.coll[4]+D.cash[4])/2);
+    svg.appendChild(el('line',{x1:dipX+118,y1:dipY+7,x2:dipTx,y2:dipTy-3,stroke:css('--loss'),'stroke-width':1,opacity:.5}));
+    svg.appendChild(el('circle',{cx:dipTx,cy:dipTy,r:2.5,fill:css('--loss')}));
+    var ec=el('text',{x:dipX,y:dipY,'text-anchor':'start'}); ec.setAttribute('font-size','11'); ec.setAttribute('font-family',css('--mono')||'monospace'); ec.setAttribute('fill',css('--loss')); ec.textContent='early operating dip \u2248 \u2212$102k'; svg.appendChild(ec);
+    // per-month hover bands (total, collateral, operating deficit)
+    var sp=iw/(D.cash.length-1);
+    D.cash.forEach(function(tot,i){
+      var deficit=tot-D.coll[i];
+      var hit=el('rect',{x:x(i)-sp/2,y:mT,width:sp,height:ih,fill:'transparent'});
+      tip(hit,
+        '<span class="tip-k">Month '+(i+1)+' &middot; cash need</span><span class="tip-v">'+moneyFull(tot)+'</span>'+
+        '<div class="tip-row"><span class="rk"><i style="background:var(--brass)"></i>Collateral</span><span class="rv">'+moneyFull(D.coll[i])+'</span></div>'+
+        '<div class="tip-row"><span class="rk"><i style="background:var(--loss)"></i>Operating deficit</span><span class="rv">'+moneyFull(deficit)+'</span></div>',
+        'Month '+(i+1)+' cash need '+moneyFull(tot)+' (collateral '+moneyFull(D.coll[i])+')');
+      svg.appendChild(hit);
+    });
+    [0,5,11,17,23].forEach(function(idx){ var l=el('text',{x:x(idx),y:H-10,'text-anchor':idx===0?'start':(idx===23?'end':'middle'),class:'axis-txt mid'}); l.textContent=M[idx]; svg.appendChild(l); });
+  }
+
+  function drawAll(){
+    drawNet(); drawRC(); drawCum(); drawCash();
+    drawHBar('chartRevMix',[
+      {n:'Top-up fee',v:300000,c:css('--brass')},
+      {n:'Subscription',v:171000,c:css('--accent')},
+      {n:'Interchange share',v:44650,c:css('--accent')},
+      {n:'ATM fee',v:15000,c:css('--muted')},
+      {n:'FX markup',v:4922,c:css('--accent-br')}
+    ],470);
+    drawHBar('chartCostMix',[
+      {n:'Gnosis fees',v:70320,c:css('--accent')},
+      {n:'Card ops & staff',v:63861,c:css('--muted')},
+      {n:'Visa CBSA / ISA',v:47625,c:css('--accent-br')},
+      {n:'Visa authorisation',v:38520,c:css('--accent-br')},
+      {n:'Top-up / bridge',v:37500,c:css('--loss')},
+      {n:'Acquisition (CAC)',v:17500,c:css('--brass')},
+      {n:'Collateral financing',v:16667,c:css('--brass')},
+      {n:'KYC',v:7500,c:css('--muted')}
+    ],960);
+  }
+
+  // reveal on scroll
+  var reveals=[].slice.call(document.querySelectorAll('.reveal'));
+  function revealAll(){ reveals.forEach(function(n){ n.classList.add('in'); }); }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(n){ io.observe(n); });
+    // Absolute failsafe: if anything is still hidden after 2.4s, show it unconditionally.
+    setTimeout(revealAll, 2400);
+  } else {
+    revealAll();
+  }
+
+  // draw once visible (so bar animations trigger in view)
+  var chartIds=['chartNet','chartRC','chartCum','chartRevMix','chartCostMix','chartCAC','chartCash'];
+  var dispatched=false;
+  function tryDraw(){ if(dispatched) return; dispatched=true; drawAll(); }
+  // draw when hero chart near viewport, else on load (load path guarantees charts always draw)
+  if('IntersectionObserver' in window){
+    var hero=document.getElementById('chartNet');
+    if(hero){
+      var heroObs=new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ tryDraw(); heroObs.disconnect(); } }); },{threshold:.05});
+      heroObs.observe(hero);
+    }
+  }
+  window.addEventListener('load',function(){ setTimeout(function(){ if(!dispatched){ tryDraw(); } },300); });
+  if(document.readyState==='complete') setTimeout(function(){ if(!dispatched){ tryDraw(); } },300);
+
+  // redraw on theme toggle / resize
+  var reTimer;
+  function redraw(){ clearTimeout(reTimer); reTimer=setTimeout(function(){ dispatched=true; drawAll(); },120); }
+  window.addEventListener('resize',redraw);
+  var mo=new MutationObserver(redraw);
+  mo.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',redraw);
+})();
+</script>
+</body>
+</html>
